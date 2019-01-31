@@ -15,7 +15,8 @@ const rootReducer = (state = initialState, action) => {
         case Actions.HANDLE_PERSON_CLICK: return handlePersonClick(state, action);
         case Actions.HANDLE_ADD_PERSON_VIEW: return handleAddPersonView(state);
         case Actions.HANDLE_ADD_PERSON: return handleAddPerson(state,action);
-
+        case Actions.HANDLE_PERSIST: return handlePersist(state,action);
+        default:
     }
     return state;
 };
@@ -41,6 +42,24 @@ const handleAddPerson = (state, action) => {
     return newState;
 }
 
+
+const handlePersist = (state,action) => {
+    const newState = JSON.parse((JSON.stringify(state)));
+
+    if (action.person === null) {
+        // do nothing : Cancel button operation of PersonEdit view
+    } else {
+        newState.people = state.people.map(p => {
+            if (p.id === action.person.id) {
+                p.firstName = action.person.firstName;
+                p.lastName = action.person.lastName;
+            }
+            return p;
+        });
+    }
+    newState.currentView = "PersonList";
+    return newState;
+}
 
 
 export default rootReducer;

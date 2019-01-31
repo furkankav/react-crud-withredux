@@ -15,9 +15,9 @@ class App extends Component {
         let view;
 
         switch (this.props.currentView) {
-            // case "PersonEdit":
-            //     view = <PersonEdit/>
-            //     break;
+            case "PersonEdit":
+                view = <PersonEdit/>
+                break;
             case "PersonAdd":
                 view =  <PersonAdd/>
                 break;
